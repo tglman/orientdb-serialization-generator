@@ -1,0 +1,11 @@
+{
+  "@class":"Test",
+  "@Type":"d",
+  "name": "a name",
+  "number": 1 ,
+  "emb": {
+	  "@class":"Test1",
+	  "@Type": "d",
+	  "field":"string"
+  }
+}
