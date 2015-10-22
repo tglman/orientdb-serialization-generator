@@ -1,0 +1,23 @@
+{
+  "@class": "Test",
+  "name": "a name",
+  "embedded": {
+    "@class": "test1",
+    "@type": "d",
+    "embedded": {
+      "@type": "d",
+      "embedded": {
+        "@type": "d",
+        "embedded": {
+          "@type": "d",
+          "some": "test",
+          "enotherLevel": {
+            "@type": "d",
+            "field": "bla"
+          }
+        }
+      },
+      "field": "bla"
+    }
+  }
+}

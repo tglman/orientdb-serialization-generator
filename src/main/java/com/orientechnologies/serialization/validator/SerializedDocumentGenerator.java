@@ -5,9 +5,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import com.orientechnologies.common.exception.OException;
 import com.orientechnologies.orient.core.db.document.ODatabaseDocument;
 import com.orientechnologies.orient.core.db.document.ODatabaseDocumentTx;
 import com.orientechnologies.orient.core.record.impl.ODocument;
+import com.orientechnologies.orient.core.record.impl.ODocumentInternal;
 import com.orientechnologies.orient.core.serialization.serializer.record.ORecordSerializer;
 import com.orientechnologies.orient.core.serialization.serializer.record.ORecordSerializerFactory;
 import com.orientechnologies.orient.core.serialization.serializer.record.string.ORecordSerializerJSON;
@@ -27,6 +29,7 @@ public class SerializedDocumentGenerator {
       for (ORecordSerializer serializer : factory.getFormats()) {
         if (serializer instanceof ORecordSerializerJSON)
           continue;
+
         File root = new File("./source");
         File dest = new File("./" + serializer);
         if (dest.exists()) {
@@ -42,6 +45,7 @@ public class SerializedDocumentGenerator {
         String[] list = root.list((dir, name) -> name.endsWith(".json"));
         for (String fileName : list)
           generateDocument(root, dest, fileName, serializer);
+
       }
     } finally {
       mockDb.drop();
@@ -49,15 +53,21 @@ public class SerializedDocumentGenerator {
   }
 
   public void generateDocument(File root, File dest, String file, ORecordSerializer serializer) throws IOException {
-
-    ODocument doc = new ODocument();
-    doc.fromJSON(new FileInputStream(root.getPath() + "/" + file));
-    String name = file.substring(0, file.length() - ".json".length());
-    String destName = dest.getPath() + "/" + name + ".bin";
-    FileOutputStream output = new FileOutputStream(destName);
-    output.write(serializer.toStream(doc, false));
-    output.close();
-    System.out.println("generated :" + destName);
+    try {
+      ODocument doc = new ODocument();
+      doc.fromJSON(new FileInputStream(root.getPath() + "/" + file));
+      doc.validate();
+      ODocumentInternal.convertAllMultiValuesToTrackedVersions(doc);
+      String name = file.substring(0, file.length() - ".json".length());
+      String destName = dest.getPath() + "/" + name + ".bin";
+      FileOutputStream output = new FileOutputStream(destName);
+      output.write(serializer.toStream(doc, false));
+      output.close();
+      System.out.println("generated :" + destName);
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      System.out.printf("Error generating data from:%s with serializer:%s\n", file, serializer.toString());
+    }
   }
 
 }

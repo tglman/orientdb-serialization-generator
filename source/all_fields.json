@@ -1,0 +1,35 @@
+{
+  "@class":"Test",
+  "name": "a name",
+  "int": 21,
+  "boolean": true,
+  "float": 10.2,
+  "double": 11.2,
+  "short": 2,
+  "long": 32,
+  "datetime": "2015-11-06 11:10:23",
+  "date": "2012-07-03",
+  "link" : "#10:20",
+  "byte" :10,
+  "decimal": 10201020301201332001.2012031220331203,
+  "binary": "YWRhZA==",
+  "embedded" : {
+    "@class":"test1",
+    "@type" :"d",
+    "field":"bla"
+  },
+  "embeddedList": ["bla","bla1"],
+  "embeddedSet": ["bla","bla1"],
+  "linkList": ["#10:20","#20:30","#20:40"],
+  "linkSet": ["#10:20","#20:30","#20:40"],
+  "map" : {
+    "key":"value",
+    "key2":"value2"
+  },
+  "linkMap" :{
+    "key" : "#20:10",
+    "key2" : "#20:11"
+  },
+  "ridBag" :["#10:20","#20:30","#20:40"],
+  "@fieldTypes": "float=f,double=d,byte=b,binary=b,date=a,datetime=t,long=l,decimal=c,short=s,embeddedSet=e,link=x,linkList=z,linkSet=n,linkMap=m,ridBag=g"
+}

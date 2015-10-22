@@ -1,0 +1,45 @@
+{
+  "@class": "Test",
+  "name": "a name",
+  "embedded": {
+    "@class": "test1",
+    "@type": "d",
+    "embeddedList": [
+      "String",
+      {
+        "@type": "d",
+        "embedded": {
+          "@type": "d",
+          "some": "test",
+          "enotherLevel": {
+            "@type": "d",
+            "field": "test1"
+          }
+        },
+        "field": "text2"
+      },
+      [
+        "bla",
+        "bla",
+        {
+          "key": [
+            {
+              "@type": "d",
+              "field": "bla_pre"
+            }
+          ]
+        }
+      ]
+    ],
+    "embeddedMap": {
+      "key": "value",
+      "key1": {
+        "@type": "d",
+        "field": "bla_text",
+        "list": [
+          "text_last"
+        ]
+      }
+    }
+  }
+}

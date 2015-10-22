@@ -1,0 +1,29 @@
+{
+  "name": "a name",
+  "anullValue": null,
+  "nullInList": [
+    "string",
+    null
+  ],
+  "nullInSet": [
+    "val",
+    null
+  ],
+  "nullInMap": {
+    "key1": "val",
+    "key2": null
+  },
+  "nullInLinkMap": {
+    "key1": "#10:1",
+    "key2": null
+  },
+  "nullInLinkList": [
+    "#10:11",
+    null
+  ],
+  "nullInkLinkSet": [
+    "#10:11",
+    null
+  ],
+  "@fieldTypes": "nullInSet=e,nullInLinkList=z,nullInkLinkSet=n,nullInLinkMap=m"
+}
